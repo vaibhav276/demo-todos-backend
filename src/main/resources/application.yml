@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: demo-todos
+  cassandra:
+    local-datacenter: datacenter1
+    schema-action: CREATE_IF_NOT_EXISTS
+    keyspace-name: demotodos
+    # contact-points: 127.0.0.1
+    contact-points: 172.31.13.59
+    port: 9042
+    request:
+      timeout: 10s
+    connection:
+      connect-timeout: 10s
+      init-query-timeout: 10s
