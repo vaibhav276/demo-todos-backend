@@ -5,18 +5,27 @@ import com.demo.demotodos.model.Todo;
 
 public class TodoMapper {
 	public static Todo mapToTodo(TodoDto todoDto, Todo todo) {
-		todo.setDue(todoDto.getDue());
+		todo.setDueDate(todoDto.getDueDate());
 		todo.setTitle(todoDto.getTitle());
 		todo.setDescription(todoDto.getDescription());
-		todo.setDone(todoDto.isDone());
+		todo.setDone(todoDto.getDone());
+		return todo;
+	}
+
+	public static Todo mapNonNullToTodo(TodoDto todoDto, Todo todo) {
+		if (todoDto.hasDueDate())     todo.setDueDate(todoDto.getDueDate());
+		if (todoDto.hasTitle())       todo.setTitle(todoDto.getTitle());
+		if (todoDto.hasDescription()) todo.setDescription(todoDto.getDescription());
+		if (todoDto.hasDone())        todo.setDone(todoDto.getDone());
 		return todo;
 	}
 
 	public static TodoDto mapToTodoDto(Todo todo, TodoDto todoDto) {
-		todoDto.setDue(todo.getDue());
+		todoDto.setTodoId(todo.getTodoId());
+		todoDto.setDueDate(todo.getDueDate());
 		todoDto.setTitle(todo.getTitle());
 		todoDto.setDescription(todo.getDescription());
-		todoDto.setDone(todo.isDone());
+		todoDto.setDone(todo.getDone());
 		return todoDto;
 	}
 }

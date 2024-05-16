@@ -4,6 +4,7 @@ spring:
   cassandra:
     local-datacenter: datacenter1
     schema-action: CREATE_IF_NOT_EXISTS
+    # schema-action: RECREATE
     keyspace-name: demotodos
     # contact-points: 127.0.0.1
     contact-points: 172.31.13.59
@@ -13,3 +14,13 @@ spring:
     connection:
       connect-timeout: 10s
       init-query-timeout: 10s
+  jpa:
+    show-sql: true
+    properties:
+      hibernate:
+        format-sql: true
+
+# Uncomment to see SQL statements in logs
+# logging:
+#   level:
+#     root: debug

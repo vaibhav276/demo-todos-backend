@@ -10,15 +10,23 @@ TODO
 mvn clean package
 ```
 
-## Start/Stop Cassandra container
+## Start dependency containers
 Start
 ```sh
-docker compose up -d
+# First time
+docker compose -f docker-compose.yml up -d
+
+# Start a previously stopped state
+docker compose -f docker-compose.yml start -d
 ```
 
 Stop
 ```sh
-docker compose stop
+# Stopping to preserve state
+docker compose -f docker-compose.yml stop
+
+# Destroy state
+docker compose -f docker-compose.yml down
 ```
 
 ## Run the app

@@ -1,8 +1,10 @@
 package com.demo.demotodos.model;
 
-import java.sql.Timestamp;
+import java.util.Date;
 
-import org.springframework.data.cassandra.core.mapping.PrimaryKey;
+import org.springframework.data.cassandra.core.cql.Ordering;
+import org.springframework.data.cassandra.core.cql.PrimaryKeyType;
+import org.springframework.data.cassandra.core.mapping.PrimaryKeyColumn;
 import org.springframework.data.cassandra.core.mapping.Table;
 
 import lombok.AllArgsConstructor;
@@ -16,12 +18,26 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-@Table
+@Table(value = "user_todo")
 public class Todo {
-	@PrimaryKey
-	private Timestamp due;
 
+	@PrimaryKeyColumn(
+		name = "user_id",
+		ordinal = 0,
+		type = PrimaryKeyType.PARTITIONED
+	)
+	private String userId;
+
+	@PrimaryKeyColumn(
+		name = "todo_id",
+		ordinal = 1,
+		type = PrimaryKeyType.CLUSTERED,
+		ordering = Ordering.ASCENDING
+	)
+	private String todoId;
+
+	private Date dueDate;
 	private String title;
 	private String description;
-	private boolean done;
+	private Boolean done;
 }
