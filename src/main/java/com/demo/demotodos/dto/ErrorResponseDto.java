@@ -2,8 +2,6 @@ package com.demo.demotodos.dto;
 
 import java.util.Date;
 
-import org.springframework.http.HttpStatus;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;

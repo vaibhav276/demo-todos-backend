@@ -3,8 +3,6 @@ package com.demo.demotodos.service;
 import java.util.List;
 import java.util.Optional;
 
-import com.demo.demotodos.dto.TodoDto;
-import com.demo.demotodos.exception.ResourceNotFoundException;
 import com.demo.demotodos.model.Todo;
 
 public interface ITodosService {

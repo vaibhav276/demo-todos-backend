@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,9 +16,10 @@ import java.util.Optional;
 import com.demo.demotodos.dto.TodoDto;
 import com.demo.demotodos.mapper.TodoMapper;
 import com.demo.demotodos.model.Todo;
-import com.demo.demotodos.repository.TodosRepository;
 import com.demo.demotodos.service.ITodosService;
-import com.demo.demotodos.exception.ResourceNotFoundException;
+
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotBlank;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -29,6 +31,7 @@ import org.springframework.web.bind.annotation.RequestHeader;
 @RestController
 @CrossOrigin(origins = "http://localhost:8081")
 @RequestMapping(path = "/api/v1")
+@Validated
 public class TodosV1Controller {
 
 	@Autowired
@@ -42,7 +45,9 @@ public class TodosV1Controller {
 	 */
 	@GetMapping("/todos")
 	public ResponseEntity<List<TodoDto>> getTodos(
+		@NotBlank(message = "user_id cannot be empty or null")
 		@RequestHeader("user_id") String userId,
+
 		@RequestParam("done") Optional<Boolean> done
 	) {
 
@@ -68,7 +73,10 @@ public class TodosV1Controller {
 	 */
 	@PostMapping("/todos")
 	public ResponseEntity<TodoDto> postTodo(
+		@NotBlank(message = "user_id cannot be empty or null")
 		@RequestHeader("user_id") String userId,
+
+		@Valid
 		@RequestBody TodoDto todoDto
 		) {
 		Todo todo = new Todo();
@@ -91,7 +99,10 @@ public class TodosV1Controller {
 	 */
 	@GetMapping("/todo/t/{todo_id}")
 	public ResponseEntity<TodoDto> getTodo(
+		@NotBlank(message = "user_id cannot be empty or null")
 		@RequestHeader("user_id") String userId,
+
+		@NotBlank(message = "todo_id cannot be empty or null")
 		@PathVariable("todo_id") String todoId
 	) {
 		Todo todo = todosService.getTodo(userId, todoId);
@@ -100,7 +111,10 @@ public class TodosV1Controller {
 	}
 	
 	/**
-	 * Update fields of a given Todo
+	 * Update fields of a given Todo. Only fields to be updated need to be sent in request
+	 * 
+	 * TODO: No validation on input JSON because its acceptable to send nulls or empty for fields that don't need updating
+	 * 
 	 * @param userId
 	 * @param todoId
 	 * @param todoDto
@@ -108,8 +122,12 @@ public class TodosV1Controller {
 	 */
 	@PatchMapping("/todo/t/{todo_id}")
 	public ResponseEntity<TodoDto> patchTodo(
+		@NotBlank(message = "user_id cannot be empty or null")
 		@RequestHeader("user_id") String userId,
+
+		@NotBlank(message = "todo_id cannot be empty or null")
 		@PathVariable("todo_id") String todoId,
+
 		@RequestBody TodoDto todoDto
 	) {
 		Todo todo = todosService.getTodo(userId, todoId);
@@ -128,7 +146,10 @@ public class TodosV1Controller {
 	 */
 	@DeleteMapping("/todo/t/{todo_id}")
 	public ResponseEntity<Object> deleteTodo(
+		@NotBlank(message = "user_id cannot be empty or null")
 		@RequestHeader("user_id") String userId,
+
+		@NotBlank(message = "todo_id cannot be empty or null")
 		@PathVariable("todo_id") String todoId
 	) {
 		boolean success = todosService.deleteTodo(userId, todoId);
