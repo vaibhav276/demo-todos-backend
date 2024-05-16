@@ -16,8 +16,8 @@ import com.demo.demotodos.dto.TodoDto;
 import com.demo.demotodos.mapper.TodoMapper;
 import com.demo.demotodos.model.Todo;
 import com.demo.demotodos.repository.TodosRepository;
-import com.github.f4b6a3.ulid.Ulid;
-import com.github.f4b6a3.ulid.UlidCreator;
+import com.demo.demotodos.service.ITodosService;
+import com.demo.demotodos.exception.ResourceNotFoundException;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -32,17 +32,21 @@ import org.springframework.web.bind.annotation.RequestHeader;
 public class TodosV1Controller {
 
 	@Autowired
-	TodosRepository todosRepository;
+	ITodosService todosService;
 
-	// Get all todos of a given user_id
+	/**
+	 * Get all Todos of a given User
+	 * @param userId
+	 * @param done
+	 * @return List<TodoDto> - list of created Todos
+	 */
 	@GetMapping("/todos")
 	public ResponseEntity<List<TodoDto>> getTodos(
 		@RequestHeader("user_id") String userId,
 		@RequestParam("done") Optional<Boolean> done
 	) {
-		Iterable<Todo> todos = done.isEmpty() ? 
-			todosRepository.findByUserId(userId) 
-			: todosRepository.findByUserIdAndDone(userId, done.get());
+
+		List<Todo> todos = todosService.getTodos(userId, done);
 
 		List<TodoDto> todosDto = new ArrayList<>();
 		for (Todo t : todos) {
@@ -56,7 +60,12 @@ public class TodosV1Controller {
 				.body(todosDto);
 	}
 
-	// Add a given new todo to a given user_id
+	/**
+	 * Add a given new Todo to a given User
+	 * @param userId
+	 * @param Todo in json format
+	 * @return TodoDto - Created Todo
+	 */
 	@PostMapping("/todos")
 	public ResponseEntity<TodoDto> postTodo(
 		@RequestHeader("user_id") String userId,
@@ -64,11 +73,9 @@ public class TodosV1Controller {
 		) {
 		Todo todo = new Todo();
 		todo = TodoMapper.mapToTodo(todoDto, todo);
-		Ulid ulid = UlidCreator.getUlid();
-		todo.setTodoId(ulid.toString());
-		todo.setUserId(userId);
-		todosRepository.save(todo);
 
+		todo = todosService.createTodo(userId, todo);
+		
 		todoDto.setTodoId(todo.getTodoId());
 
 		return ResponseEntity
@@ -76,60 +83,59 @@ public class TodosV1Controller {
 				.body(todoDto);
 	}
 
-	// Get all fields of given todo_id
+	/**
+	 * Get all fields of given Todo
+	 * @param userId
+	 * @param todoId
+	 * @return TodoDto - Found Todo
+	 */
 	@GetMapping("/todo/t/{todo_id}")
 	public ResponseEntity<TodoDto> getTodo(
 		@RequestHeader("user_id") String userId,
 		@PathVariable("todo_id") String todoId
 	) {
-		Optional<Todo> oTodo = todosRepository.findByUserIdAndTodoId(userId, todoId);
-		if (oTodo.isEmpty()) {
-			return ResponseEntity.notFound().build();
-		} else {
-			TodoDto todoDto = new TodoDto();
-			TodoMapper.mapToTodoDto(oTodo.get(), todoDto);
-			return ResponseEntity.ok().body(todoDto);
-		}
+		Todo todo = todosService.getTodo(userId, todoId);
+		TodoDto todoDto = TodoMapper.mapToTodoDto(todo, new TodoDto());
+		return ResponseEntity.ok().body(todoDto);
 	}
 	
-	// Update fields of a given todo_id
+	/**
+	 * Update fields of a given Todo
+	 * @param userId
+	 * @param todoId
+	 * @param todoDto
+	 * @return TodoDto - Updated Todo
+	 */
 	@PatchMapping("/todo/t/{todo_id}")
 	public ResponseEntity<TodoDto> patchTodo(
 		@RequestHeader("user_id") String userId,
 		@PathVariable("todo_id") String todoId,
 		@RequestBody TodoDto todoDto
 	) {
-		Optional<Todo> oTodo = todosRepository.findByUserIdAndTodoId(userId, todoId);
-		if (oTodo.isEmpty()) {
-			return ResponseEntity.notFound().build();
-		} else {
-			Todo todo = oTodo.get();
-			TodoMapper.mapNonNullToTodo(todoDto, todo);
-			todosRepository.save(todo);
-
-			Optional<Todo> oTodo1 = todosRepository.findByUserIdAndTodoId(userId, todoId);
-			if (oTodo1.isPresent()) {
-				TodoDto todoDto1 = new TodoDto();
-				TodoMapper.mapToTodoDto(oTodo1.get(), todoDto1);
-				return ResponseEntity.ok().body(todoDto1);
-			} else {
-				return ResponseEntity.internalServerError().build();
-			}
-		}
+		Todo todo = todosService.getTodo(userId, todoId);
+		todo = TodoMapper.mapNonNullToTodo(todoDto, todo);
+		todosService.patchTodo(userId, todoId, todo);
+		return ResponseEntity
+			.ok()
+			.body(TodoMapper.mapToTodoDto(todo, new TodoDto()));
 	}
 
-	// Delete a given todo_id
+	/**
+	 * Delete a given Todo
+	 * @param userId
+	 * @param todoId
+	 * @return null - Nothing if successful
+	 */
 	@DeleteMapping("/todo/t/{todo_id}")
 	public ResponseEntity<Object> deleteTodo(
 		@RequestHeader("user_id") String userId,
 		@PathVariable("todo_id") String todoId
 	) {
-		Optional<Todo> oTodo = todosRepository.findByUserIdAndTodoId(userId, todoId);
-		if (oTodo.isEmpty()) {
-			return ResponseEntity.notFound().build();
+		boolean success = todosService.deleteTodo(userId, todoId);
+		if (success) {
+			return ResponseEntity.ok().body(null);
 		} else {
-			todosRepository.delete(oTodo.get());
-			return ResponseEntity.ok(null);
+			return ResponseEntity.internalServerError().build();
 		}
 	}
 }
