@@ -1,6 +1,9 @@
 package com.demo.demotodos.mapper;
 
+import java.util.List;
+
 import com.demo.demotodos.dto.TodoDto;
+import com.demo.demotodos.dto.TodoListDto;
 import com.demo.demotodos.model.Todo;
 
 public class TodoMapper {
@@ -27,5 +30,15 @@ public class TodoMapper {
 		todoDto.setDescription(todo.getDescription());
 		todoDto.setDone(todo.getDone());
 		return todoDto;
+	}
+
+	public static TodoListDto mapToTodoListDto(List<Todo> todos, TodoListDto todoListDto) {
+		for (Todo t : todos) {
+			TodoDto td = new TodoDto();
+			td = TodoMapper.mapToTodoDto(t, td);
+			todoListDto.add(td);
+		}
+
+		return todoListDto;
 	}
 }

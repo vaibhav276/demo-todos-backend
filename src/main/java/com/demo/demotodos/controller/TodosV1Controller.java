@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Optional;
 
 import com.demo.demotodos.dto.TodoDto;
+import com.demo.demotodos.dto.TodoListDto;
 import com.demo.demotodos.mapper.TodoMapper;
 import com.demo.demotodos.model.Todo;
 import com.demo.demotodos.service.ITodosService;
@@ -38,7 +39,7 @@ import org.springframework.web.bind.annotation.RequestHeader;
 
 @Tag(name = "REST APIs for Demo Todos", description = "REST APIs for Demo Todos")
 @RestController
-@CrossOrigin(origins = "http://localhost:8081")
+@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping(path = "/api/v1")
 @Validated
 public class TodosV1Controller {
@@ -65,23 +66,24 @@ public class TodosV1Controller {
 			)
 	})
 	@GetMapping("/todos")
-	public ResponseEntity<List<TodoDto>> getTodos(
+	public ResponseEntity<TodoListDto> getTodos(
 			@NotBlank(message = "user_id cannot be empty or null") @RequestHeader("user_id") String userId,
 
 			@RequestParam("done") Optional<Boolean> done) {
 
 		List<Todo> todos = todosService.getTodos(userId, done);
 
-		List<TodoDto> todosDto = new ArrayList<>();
-		for (Todo t : todos) {
-			TodoDto td = new TodoDto();
-			td = TodoMapper.mapToTodoDto(t, td);
-			todosDto.add(td);
-		}
+		// List<TodoDto> todosDto = new ArrayList<>();
+		// for (Todo t : todos) {
+		// 	TodoDto td = new TodoDto();
+		// 	td = TodoMapper.mapToTodoDto(t, td);
+		// 	todosDto.add(td);
+		// }
+		TodoListDto todoListDto = TodoMapper.mapToTodoListDto(todos, new TodoListDto());
 
 		return ResponseEntity
 				.ok()
-				.body(todosDto);
+				.body(todoListDto);
 	}
 
 	/**
