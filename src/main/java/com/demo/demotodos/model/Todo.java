@@ -7,6 +7,8 @@ import org.springframework.data.cassandra.core.cql.PrimaryKeyType;
 import org.springframework.data.cassandra.core.mapping.PrimaryKeyColumn;
 import org.springframework.data.cassandra.core.mapping.Table;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -26,6 +28,7 @@ public class Todo {
 		ordinal = 0,
 		type = PrimaryKeyType.PARTITIONED
 	)
+	@JsonProperty("user_id")
 	private String userId;
 
 	@PrimaryKeyColumn(
@@ -34,8 +37,10 @@ public class Todo {
 		type = PrimaryKeyType.CLUSTERED,
 		ordering = Ordering.ASCENDING
 	)
+	@JsonProperty("todo_id")
 	private String todoId;
 
+	@JsonProperty("due_date")
 	private Date dueDate;
 	private String title;
 	private String description;

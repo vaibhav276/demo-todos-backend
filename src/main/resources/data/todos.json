@@ -1,0 +1,36 @@
+{
+	"todos": [
+	{
+		"todo_id": "01HXZST3YBK93BS6H1MRSQGZ60",
+		"user_id": "U1235",
+		"title": "Do microservices project",
+		"description": "Use spring boot",
+		"due_date": "2024-05-10",
+		"done": true
+	},
+	{
+		"todo_id": "01HXZSV6J4BR6JR5AN8K2PCP5N",
+		"user_id": "U1235",
+		"title": "Do serverless project",
+		"description": "Use nodejs",
+		"due_date": "2024-05-15",
+		"done": true
+	},
+	{
+		"todo_id": "01HY58XG9GAY3EYY7C0EB5PA1R",
+		"user_id": "U1235",
+		"title": "Read a book",
+		"description": "Pick your favorite",
+		"due_date": "2024-05-20",
+		"done": false
+	},
+	{
+		"todo_id": "01HY58Y5RAXKNPPEYFEMMJ8VDG",
+		"user_id": "U1234",
+		"title": "Think about life",
+		"description": "What is it?",
+		"due_date": "2024-05-30",
+		"done": false
+	}
+	]
+}

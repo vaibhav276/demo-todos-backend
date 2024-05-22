@@ -20,7 +20,7 @@ spring:
       hibernate:
         format-sql: true
 
-# Uncomment to see SQL statements in logs
+# # Uncomment to see SQL statements in logs
 # logging:
 #   level:
 #     root: debug
