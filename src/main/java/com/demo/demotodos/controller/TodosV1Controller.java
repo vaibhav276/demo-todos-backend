@@ -73,12 +73,6 @@ public class TodosV1Controller {
 
 		List<Todo> todos = todosService.getTodos(userId, done);
 
-		// List<TodoDto> todosDto = new ArrayList<>();
-		// for (Todo t : todos) {
-		// 	TodoDto td = new TodoDto();
-		// 	td = TodoMapper.mapToTodoDto(t, td);
-		// 	todosDto.add(td);
-		// }
 		TodoListDto todoListDto = TodoMapper.mapToTodoListDto(todos, new TodoListDto());
 
 		return ResponseEntity
