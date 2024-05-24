@@ -15,13 +15,13 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Component
-public class TodoTestDataLoader implements CommandLineRunner {
-	static final Logger log = LoggerFactory.getLogger(TodoTestDataLoader.class);
+public class SampleDataLoader implements CommandLineRunner {
+	static final Logger log = LoggerFactory.getLogger(SampleDataLoader.class);
 
 	TodosRepository todosRepository;
 	ObjectMapper objectMapper;
 
-	public TodoTestDataLoader(TodosRepository todosRepository, ObjectMapper objectMapper) {
+	public SampleDataLoader(TodosRepository todosRepository, ObjectMapper objectMapper) {
 		this.todosRepository = todosRepository;
 		this.objectMapper = objectMapper;
 	}

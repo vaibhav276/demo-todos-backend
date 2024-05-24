@@ -24,7 +24,7 @@ import com.demo.demotodos.model.Todo;
 
 @WebMvcTest(TodosV1Controller.class)
 @AutoConfigureMockMvc
-public class DemoTodosControllerTests {
+public class ControllerTests {
 
 	@Autowired
 	MockMvc mockMvc;

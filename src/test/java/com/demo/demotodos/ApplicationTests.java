@@ -8,7 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import com.demo.demotodos.controller.TodosV1Controller;
 
 @SpringBootTest
-class DemoTodosApplicationTests {
+class ApplicationTests {
 
 	@Autowired
 	TodosV1Controller todosController;

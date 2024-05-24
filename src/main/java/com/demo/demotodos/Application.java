@@ -29,10 +29,10 @@ import io.swagger.v3.oas.annotations.info.License;
 		url = "https://localhost:8080/swagger-ui/index.html"
 	)
 )
-public class DemoTodosApplication {
+public class Application {
 
 	public static void main(String[] args) {
-		SpringApplication.run(DemoTodosApplication.class, args);
+		SpringApplication.run(Application.class, args);
 	}
 
 }
