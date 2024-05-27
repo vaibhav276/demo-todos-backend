@@ -21,6 +21,9 @@ REST APIs are implemented in [Java](https://www.java.com/) using [Spring Boot](h
 ## API Documentation
 API is documented using [Open API](https://www.openapis.org/what-is-openapi) specs.
 
+## Security
+It uses [KeyCloak](https://www.keycloak.org/) as IAM server.
+
 # Local testing
 ## Build the app
 ```sh
