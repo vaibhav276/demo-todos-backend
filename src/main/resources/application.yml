@@ -24,3 +24,9 @@ spring:
 # logging:
 #   level:
 #     root: debug
+
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: http://localhost:7070/realms/quickstart/protocol/openid-connect/certs

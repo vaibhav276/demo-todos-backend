@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -34,7 +36,6 @@ import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
 
 @Tag(name = "REST APIs for Demo Todos", description = "REST APIs for Demo Todos")
 @RestController
@@ -66,9 +67,10 @@ public class TodosV1Controller {
 	})
 	@GetMapping("/todos")
 	public ResponseEntity<TodoListDto> getTodos(
-			@NotBlank(message = "user_id cannot be empty or null") @RequestHeader("user_id") String userId,
-
+			@AuthenticationPrincipal(errorOnInvalidType=true) Jwt jwt,
 			@RequestParam("done") Optional<Boolean> done) {
+
+		String userId = jwt.getClaimAsString("preferred_username");
 
 		List<Todo> todos = todosService.getTodos(userId, done);
 
@@ -99,9 +101,11 @@ public class TodosV1Controller {
 	})
 	@PostMapping("/todos")
 	public ResponseEntity<TodoDto> postTodo(
-			@NotBlank(message = "user_id cannot be empty or null") @RequestHeader("user_id") String userId,
-
+			@AuthenticationPrincipal Jwt jwt,
 			@Valid @RequestBody TodoDto todoDto) {
+
+		String userId = jwt.getClaimAsString("preferred_username");
+
 		Todo todo = new Todo();
 		todo = TodoMapper.mapToTodo(todoDto, todo);
 
@@ -134,9 +138,11 @@ public class TodosV1Controller {
 	})
 	@GetMapping("/todo/t/{todo_id}")
 	public ResponseEntity<TodoDto> getTodo(
-			@NotBlank(message = "user_id cannot be empty or null") @RequestHeader("user_id") String userId,
-
+			@AuthenticationPrincipal Jwt jwt,
 			@NotBlank(message = "todo_id cannot be empty or null") @PathVariable("todo_id") String todoId) {
+
+		String userId = jwt.getClaimAsString("preferred_username");
+
 		Todo todo = todosService.getTodo(userId, todoId);
 		TodoDto todoDto = TodoMapper.mapToTodoDto(todo, new TodoDto());
 		return ResponseEntity.ok().body(todoDto);
@@ -167,14 +173,16 @@ public class TodosV1Controller {
 			)
 	})
 	public ResponseEntity<TodoDto> patchTodo(
-			@NotBlank(message = "user_id cannot be empty or null") @RequestHeader("user_id") String userId,
-
+			@AuthenticationPrincipal Jwt jwt,
 			@NotBlank(message = "todo_id cannot be empty or null") @PathVariable("todo_id") String todoId,
-
 			@RequestBody TodoDto todoDto) {
+
+		String userId = jwt.getClaimAsString("preferred_username");
+
 		Todo todo = todosService.getTodo(userId, todoId);
 		todo = TodoMapper.mapNonNullToTodo(todoDto, todo);
 		todosService.patchTodo(userId, todoId, todo);
+
 		return ResponseEntity
 				.ok()
 				.body(TodoMapper.mapToTodoDto(todo, new TodoDto()));
@@ -196,9 +204,11 @@ public class TodosV1Controller {
 	})
 	@DeleteMapping("/todo/t/{todo_id}")
 	public ResponseEntity<Object> deleteTodo(
-			@NotBlank(message = "user_id cannot be empty or null") @RequestHeader("user_id") String userId,
-
+			@AuthenticationPrincipal Jwt jwt,
 			@NotBlank(message = "todo_id cannot be empty or null") @PathVariable("todo_id") String todoId) {
+
+		String userId = jwt.getClaimAsString("preferred_username");
+
 		boolean success = todosService.deleteTodo(userId, todoId);
 		if (success) {
 			return ResponseEntity.ok().body(null);

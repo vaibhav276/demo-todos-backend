@@ -30,11 +30,11 @@ public class IntegrationTests {
 
 		final String userId = "test_user";
 
-		ResponseEntity<TodoDto> createResponse = todosController.postTodo(userId, todoDto);
+		ResponseEntity<TodoDto> createResponse = todosController.postTodo(null, userId, todoDto);
 
 		Assertions.assertThat(createResponse.getStatusCode()).isEqualTo(HttpStatus.CREATED);
 
-		ResponseEntity<TodoListDto> getResponse = todosController.getTodos(userId, Optional.empty());
+		ResponseEntity<TodoListDto> getResponse = todosController.getTodos(null, userId, Optional.empty());
 
 		Assertions.assertThat(getResponse.getStatusCode()).isEqualTo(HttpStatus.OK);
 		Assertions.assertThat(getResponse.getBody()).hasFieldOrProperty("count");
@@ -44,7 +44,7 @@ public class IntegrationTests {
 		List<TodoDto> todos = getResponse.getBody().getTodos();
 
 		for (TodoDto td : todos) {
-			ResponseEntity<Object> deleteResponse = todosController.deleteTodo(userId, td.getTodoId());
+			ResponseEntity<Object> deleteResponse = todosController.deleteTodo(null, userId, td.getTodoId());
 			Assertions.assertThat(deleteResponse.getStatusCode()).isEqualTo(HttpStatus.OK);
 		}
 	}

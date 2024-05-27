@@ -4,3 +4,13 @@ services:
     image: cassandra:5.0
     ports:
       - "9042:9042"
+
+  keycloak:
+    container_name: keycloak
+    image: quay.io/keycloak/keycloak:24.0.4
+    ports:
+      - "7070:8080"
+    environment:
+      KEYCLOAK_ADMIN: "admin"
+      KEYCLOAK_ADMIN_PASSWORD: "password"
+    command: "start-dev"
