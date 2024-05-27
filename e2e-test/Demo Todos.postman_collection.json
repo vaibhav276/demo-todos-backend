@@ -1,0 +1,266 @@
+{
+	"info": {
+		"_postman_id": "1ad1458e-742c-470d-9e46-dec0859d8cdd",
+		"name": "Demo Todos",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "34701264"
+	},
+	"item": [
+		{
+			"name": "Create Todo",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJKaWR4S1BxQ1UybERDOHEwWEttMnJYd0NCVm5hUjVqUDE0Uzlnb0I0ZVJFIn0.eyJleHAiOjE3MTY3OTc5NDYsImlhdCI6MTcxNjc5NzY0NiwianRpIjoiYTllNTk4NjYtNjRkMi00YmNiLTg0NDMtMGQ3MjUzNGY3NGZkIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo3MDcwL3JlYWxtcy9kZW1vdG9kb3MiLCJzdWIiOiIxMTI0NTk3Ny0zMWIwLTQwMWMtOTk1Yy1mN2NhZTMxZTliZDciLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJhdXRoei1zZXJ2bGV0Iiwic2Vzc2lvbl9zdGF0ZSI6Ijk5NTEzZjM3LTNhODUtNDdlNC1hMTFmLTI3YjJhYTlkNmUwMiIsImFjciI6IjEiLCJhbGxvd2VkLW9yaWdpbnMiOlsiaHR0cDovLzEyNy4wLjAuMTo4MDgwIiwiaHR0cDovL2xvY2FsaG9zdDo4MDgwIl0sInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJ1c2VyIl19LCJzY29wZSI6ImVtYWlsIHByb2ZpbGUiLCJzaWQiOiI5OTUxM2YzNy0zYTg1LTQ3ZTQtYTExZi0yN2IyYWE5ZDZlMDIiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsIm5hbWUiOiJBbGljZSBMaWRkZWwiLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJhbGljZSIsImdpdmVuX25hbWUiOiJBbGljZSIsImZhbWlseV9uYW1lIjoiTGlkZGVsIiwiZW1haWwiOiJhbGljZUBrZXljbG9hay5vcmcifQ.Xi-V2e32-bvEZzeh2vKKHCC6g1CK2a-DP-upzaoZ9GWbVwTL3jpqIZEHaA8LLVAJnfKDoloymo9SntCgZ1ELnCdT4QzNMgDlYPVY3hywDZgmqkxBy0IlOMxqQDCIzB0W7hZoHXtpZ4_ncJjV5oVnYaw7q65Ropx2VmyVj_3F4BcKM124ZvHVSsCpYMaLKWcm8bYs_v4OXbdKTXcB5gYwJJr4hCMF9rMQimC83PezwDd6b1nKtZEWhyAs1sY7rZRzxP_zjNNyDXuMYTwE-KhlScnfgOKm2HDDaNJ6VmQSIiT_KnnszZpU-uqNzJC-aodhYLNUlrLSS1MXYUdCtb1o2g",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "",
+						"value": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"due_date\": \"2024-09-12\",\r\n    \"title\": \"Delete me\",\r\n    \"description\": \"Doesn't matter\",\r\n    \"done\": false\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/v1/todos",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"todos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Todos",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJKaWR4S1BxQ1UybERDOHEwWEttMnJYd0NCVm5hUjVqUDE0Uzlnb0I0ZVJFIn0.eyJleHAiOjE3MTY3OTc5NDYsImlhdCI6MTcxNjc5NzY0NiwianRpIjoiYTllNTk4NjYtNjRkMi00YmNiLTg0NDMtMGQ3MjUzNGY3NGZkIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo3MDcwL3JlYWxtcy9kZW1vdG9kb3MiLCJzdWIiOiIxMTI0NTk3Ny0zMWIwLTQwMWMtOTk1Yy1mN2NhZTMxZTliZDciLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJhdXRoei1zZXJ2bGV0Iiwic2Vzc2lvbl9zdGF0ZSI6Ijk5NTEzZjM3LTNhODUtNDdlNC1hMTFmLTI3YjJhYTlkNmUwMiIsImFjciI6IjEiLCJhbGxvd2VkLW9yaWdpbnMiOlsiaHR0cDovLzEyNy4wLjAuMTo4MDgwIiwiaHR0cDovL2xvY2FsaG9zdDo4MDgwIl0sInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJ1c2VyIl19LCJzY29wZSI6ImVtYWlsIHByb2ZpbGUiLCJzaWQiOiI5OTUxM2YzNy0zYTg1LTQ3ZTQtYTExZi0yN2IyYWE5ZDZlMDIiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsIm5hbWUiOiJBbGljZSBMaWRkZWwiLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJhbGljZSIsImdpdmVuX25hbWUiOiJBbGljZSIsImZhbWlseV9uYW1lIjoiTGlkZGVsIiwiZW1haWwiOiJhbGljZUBrZXljbG9hay5vcmcifQ.Xi-V2e32-bvEZzeh2vKKHCC6g1CK2a-DP-upzaoZ9GWbVwTL3jpqIZEHaA8LLVAJnfKDoloymo9SntCgZ1ELnCdT4QzNMgDlYPVY3hywDZgmqkxBy0IlOMxqQDCIzB0W7hZoHXtpZ4_ncJjV5oVnYaw7q65Ropx2VmyVj_3F4BcKM124ZvHVSsCpYMaLKWcm8bYs_v4OXbdKTXcB5gYwJJr4hCMF9rMQimC83PezwDd6b1nKtZEWhyAs1sY7rZRzxP_zjNNyDXuMYTwE-KhlScnfgOKm2HDDaNJ6VmQSIiT_KnnszZpU-uqNzJC-aodhYLNUlrLSS1MXYUdCtb1o2g",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "",
+						"value": "",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "localhost:8080/api/v1/todos",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"todos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Todo by ID",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJKaWR4S1BxQ1UybERDOHEwWEttMnJYd0NCVm5hUjVqUDE0Uzlnb0I0ZVJFIn0.eyJleHAiOjE3MTY3OTc5NDYsImlhdCI6MTcxNjc5NzY0NiwianRpIjoiYTllNTk4NjYtNjRkMi00YmNiLTg0NDMtMGQ3MjUzNGY3NGZkIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo3MDcwL3JlYWxtcy9kZW1vdG9kb3MiLCJzdWIiOiIxMTI0NTk3Ny0zMWIwLTQwMWMtOTk1Yy1mN2NhZTMxZTliZDciLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJhdXRoei1zZXJ2bGV0Iiwic2Vzc2lvbl9zdGF0ZSI6Ijk5NTEzZjM3LTNhODUtNDdlNC1hMTFmLTI3YjJhYTlkNmUwMiIsImFjciI6IjEiLCJhbGxvd2VkLW9yaWdpbnMiOlsiaHR0cDovLzEyNy4wLjAuMTo4MDgwIiwiaHR0cDovL2xvY2FsaG9zdDo4MDgwIl0sInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJ1c2VyIl19LCJzY29wZSI6ImVtYWlsIHByb2ZpbGUiLCJzaWQiOiI5OTUxM2YzNy0zYTg1LTQ3ZTQtYTExZi0yN2IyYWE5ZDZlMDIiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsIm5hbWUiOiJBbGljZSBMaWRkZWwiLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJhbGljZSIsImdpdmVuX25hbWUiOiJBbGljZSIsImZhbWlseV9uYW1lIjoiTGlkZGVsIiwiZW1haWwiOiJhbGljZUBrZXljbG9hay5vcmcifQ.Xi-V2e32-bvEZzeh2vKKHCC6g1CK2a-DP-upzaoZ9GWbVwTL3jpqIZEHaA8LLVAJnfKDoloymo9SntCgZ1ELnCdT4QzNMgDlYPVY3hywDZgmqkxBy0IlOMxqQDCIzB0W7hZoHXtpZ4_ncJjV5oVnYaw7q65Ropx2VmyVj_3F4BcKM124ZvHVSsCpYMaLKWcm8bYs_v4OXbdKTXcB5gYwJJr4hCMF9rMQimC83PezwDd6b1nKtZEWhyAs1sY7rZRzxP_zjNNyDXuMYTwE-KhlScnfgOKm2HDDaNJ6VmQSIiT_KnnszZpU-uqNzJC-aodhYLNUlrLSS1MXYUdCtb1o2g",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "",
+						"value": "",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "localhost:8080/api/v1/todo/t/01HXZST3YBK93BS6H1MRSQGZ60",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"todo",
+						"t",
+						"01HXZST3YBK93BS6H1MRSQGZ60"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Todo by ID",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJKaWR4S1BxQ1UybERDOHEwWEttMnJYd0NCVm5hUjVqUDE0Uzlnb0I0ZVJFIn0.eyJleHAiOjE3MTY3OTc5NDYsImlhdCI6MTcxNjc5NzY0NiwianRpIjoiYTllNTk4NjYtNjRkMi00YmNiLTg0NDMtMGQ3MjUzNGY3NGZkIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo3MDcwL3JlYWxtcy9kZW1vdG9kb3MiLCJzdWIiOiIxMTI0NTk3Ny0zMWIwLTQwMWMtOTk1Yy1mN2NhZTMxZTliZDciLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJhdXRoei1zZXJ2bGV0Iiwic2Vzc2lvbl9zdGF0ZSI6Ijk5NTEzZjM3LTNhODUtNDdlNC1hMTFmLTI3YjJhYTlkNmUwMiIsImFjciI6IjEiLCJhbGxvd2VkLW9yaWdpbnMiOlsiaHR0cDovLzEyNy4wLjAuMTo4MDgwIiwiaHR0cDovL2xvY2FsaG9zdDo4MDgwIl0sInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJ1c2VyIl19LCJzY29wZSI6ImVtYWlsIHByb2ZpbGUiLCJzaWQiOiI5OTUxM2YzNy0zYTg1LTQ3ZTQtYTExZi0yN2IyYWE5ZDZlMDIiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsIm5hbWUiOiJBbGljZSBMaWRkZWwiLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJhbGljZSIsImdpdmVuX25hbWUiOiJBbGljZSIsImZhbWlseV9uYW1lIjoiTGlkZGVsIiwiZW1haWwiOiJhbGljZUBrZXljbG9hay5vcmcifQ.Xi-V2e32-bvEZzeh2vKKHCC6g1CK2a-DP-upzaoZ9GWbVwTL3jpqIZEHaA8LLVAJnfKDoloymo9SntCgZ1ELnCdT4QzNMgDlYPVY3hywDZgmqkxBy0IlOMxqQDCIzB0W7hZoHXtpZ4_ncJjV5oVnYaw7q65Ropx2VmyVj_3F4BcKM124ZvHVSsCpYMaLKWcm8bYs_v4OXbdKTXcB5gYwJJr4hCMF9rMQimC83PezwDd6b1nKtZEWhyAs1sY7rZRzxP_zjNNyDXuMYTwE-KhlScnfgOKm2HDDaNJ6VmQSIiT_KnnszZpU-uqNzJC-aodhYLNUlrLSS1MXYUdCtb1o2g",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "",
+						"value": "",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"done\": true,\r\n    \"due_date\": \"2024-06-01\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/v1/todo/t/01HXZST3YBK93BS6H1MRSQGZ60",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"todo",
+						"t",
+						"01HXZST3YBK93BS6H1MRSQGZ60"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Todo by ID",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJKaWR4S1BxQ1UybERDOHEwWEttMnJYd0NCVm5hUjVqUDE0Uzlnb0I0ZVJFIn0.eyJleHAiOjE3MTY3OTc5NDYsImlhdCI6MTcxNjc5NzY0NiwianRpIjoiYTllNTk4NjYtNjRkMi00YmNiLTg0NDMtMGQ3MjUzNGY3NGZkIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo3MDcwL3JlYWxtcy9kZW1vdG9kb3MiLCJzdWIiOiIxMTI0NTk3Ny0zMWIwLTQwMWMtOTk1Yy1mN2NhZTMxZTliZDciLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJhdXRoei1zZXJ2bGV0Iiwic2Vzc2lvbl9zdGF0ZSI6Ijk5NTEzZjM3LTNhODUtNDdlNC1hMTFmLTI3YjJhYTlkNmUwMiIsImFjciI6IjEiLCJhbGxvd2VkLW9yaWdpbnMiOlsiaHR0cDovLzEyNy4wLjAuMTo4MDgwIiwiaHR0cDovL2xvY2FsaG9zdDo4MDgwIl0sInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJ1c2VyIl19LCJzY29wZSI6ImVtYWlsIHByb2ZpbGUiLCJzaWQiOiI5OTUxM2YzNy0zYTg1LTQ3ZTQtYTExZi0yN2IyYWE5ZDZlMDIiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsIm5hbWUiOiJBbGljZSBMaWRkZWwiLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJhbGljZSIsImdpdmVuX25hbWUiOiJBbGljZSIsImZhbWlseV9uYW1lIjoiTGlkZGVsIiwiZW1haWwiOiJhbGljZUBrZXljbG9hay5vcmcifQ.Xi-V2e32-bvEZzeh2vKKHCC6g1CK2a-DP-upzaoZ9GWbVwTL3jpqIZEHaA8LLVAJnfKDoloymo9SntCgZ1ELnCdT4QzNMgDlYPVY3hywDZgmqkxBy0IlOMxqQDCIzB0W7hZoHXtpZ4_ncJjV5oVnYaw7q65Ropx2VmyVj_3F4BcKM124ZvHVSsCpYMaLKWcm8bYs_v4OXbdKTXcB5gYwJJr4hCMF9rMQimC83PezwDd6b1nKtZEWhyAs1sY7rZRzxP_zjNNyDXuMYTwE-KhlScnfgOKm2HDDaNJ6VmQSIiT_KnnszZpU-uqNzJC-aodhYLNUlrLSS1MXYUdCtb1o2g",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "",
+						"value": "",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "localhost:8080/api/v1/todo/t/01HY09YTS65K1D8JF7MSRT7258",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"todo",
+						"t",
+						"01HY09YTS65K1D8JF7MSRT7258"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Access Token",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "client_id",
+							"value": "authz-servlet",
+							"type": "text"
+						},
+						{
+							"key": "client_secret",
+							"value": "secret",
+							"type": "text"
+						},
+						{
+							"key": "username",
+							"value": "alice",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "alice",
+							"type": "text"
+						},
+						{
+							"key": "grant_type",
+							"value": "password",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:7070/realms/demotodos/protocol/openid-connect/token",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7070",
+					"path": [
+						"realms",
+						"demotodos",
+						"protocol",
+						"openid-connect",
+						"token"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

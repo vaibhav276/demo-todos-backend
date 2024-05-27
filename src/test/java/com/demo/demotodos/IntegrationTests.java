@@ -15,6 +15,10 @@ import com.demo.demotodos.controller.TodosV1Controller;
 import com.demo.demotodos.dto.TodoDto;
 import com.demo.demotodos.dto.TodoListDto;
 
+/**
+ * TODO: Fix tests with security enabled
+ */
+
 @SpringBootTest
 public class IntegrationTests {
 	@Autowired
@@ -30,11 +34,11 @@ public class IntegrationTests {
 
 		final String userId = "test_user";
 
-		ResponseEntity<TodoDto> createResponse = todosController.postTodo(null, userId, todoDto);
+		ResponseEntity<TodoDto> createResponse = todosController.postTodo(null, todoDto);
 
 		Assertions.assertThat(createResponse.getStatusCode()).isEqualTo(HttpStatus.CREATED);
 
-		ResponseEntity<TodoListDto> getResponse = todosController.getTodos(null, userId, Optional.empty());
+		ResponseEntity<TodoListDto> getResponse = todosController.getTodos(null, Optional.empty());
 
 		Assertions.assertThat(getResponse.getStatusCode()).isEqualTo(HttpStatus.OK);
 		Assertions.assertThat(getResponse.getBody()).hasFieldOrProperty("count");
@@ -44,7 +48,7 @@ public class IntegrationTests {
 		List<TodoDto> todos = getResponse.getBody().getTodos();
 
 		for (TodoDto td : todos) {
-			ResponseEntity<Object> deleteResponse = todosController.deleteTodo(null, userId, td.getTodoId());
+			ResponseEntity<Object> deleteResponse = todosController.deleteTodo(null, td.getTodoId());
 			Assertions.assertThat(deleteResponse.getStatusCode()).isEqualTo(HttpStatus.OK);
 		}
 	}

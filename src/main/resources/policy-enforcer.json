@@ -1,5 +1,5 @@
 {
-  "realm": "quickstart",
+  "realm": "demotodos",
   "auth-server-url": "http://localhost:7070",
   "resource": "authz-servlet",
   "credentials": {

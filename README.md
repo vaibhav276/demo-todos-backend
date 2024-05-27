@@ -2,6 +2,8 @@
 This is a spring boot application for backend of "Demo Todos" application. It exposes REST API to do CRUD operations on Todo items.
 
 # Architecture
+![architecture](./demotodos_architecture.png)
+
 ## Database and stores
 The application uses [Apache Cassandra](https://cassandra.apache.org/) noSQL database to store Todo items with following properties:
 * `user_id` (Primary key)
@@ -43,9 +45,33 @@ docker compose stop
 # Destroy state
 docker compose down
 ```
+## Create keyspace
+```sh
+CREATE KEYSPACE demotodos
+   WITH replication = {'class': 'SimpleStrategy', 'replication_factor' : 1};
+```
+
+## Import security config
+When running for first time or after destroying KeyCloak container, import the realm config located at `config/realm-config.json` into KeyCloak server. This will create following users:
+- User = `alice`, Password = `alice`
+- User = `jdoe`, Password = `jdoe`
+
+JWT Tokens for these users can be obtained by running (example is for `jdoe`):
+```sh
+export access_token=$(\
+curl -X POST http://localhost:7070/realms/demotodos/protocol/openid-connect/token \
+-H 'content-type: application/x-www-form-urlencoded' \
+-d 'client_id=authz-servlet&client_secret=secret' \
+-d 'username=jdoe&password=jdoe&grant_type=password' | jq --raw-output '.access_token' \
+)
+```
 
 ## Run the app
 ```sh
 java -jar target/demo-todos-0.0.1.SNAPSHOT.jar
 ```
 
+## Test the endpoints
+While testing the endpoints, pass in Bearer Authentication JWT token (obtained above) to authenticate the user.
+
+Postman collection with some samples is located in `e2e-test/`
